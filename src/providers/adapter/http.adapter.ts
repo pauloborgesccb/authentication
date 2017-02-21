@@ -4,6 +4,7 @@ import { Config } from '@mbamobi/configuration';
 import { Resolve } from '@mbamobi/url-resolver';
 import { Result, ResultCode } from '../result';
 import { AdapterOptions } from './adapter.options';
+import 'rxjs/add/operator/timeout';
 
 export const ConfigKeyAuth = 'authentication';
 
@@ -119,6 +120,11 @@ export class HttpAdapter extends AdapterOptions {
      this.callbackBuildParams = callback;
      return this;
    }
+
+  setRequestTimeout(timeout: number): this {
+    this.http,timeout(timeout);
+    return this;
+  }
 
    protected setOption(options: Object, property: string, resolve: boolean = false, option?: string, id?: string) {
      if (!option) {
